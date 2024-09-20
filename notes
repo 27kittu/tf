@@ -1,0 +1,15 @@
+Terraform:
+-----------
+- Terraform is a infrastructure management tool introduced by Hashicorp for creating, changing and versioning of infrastructure efficiently.
+- Terraform has its own configuration language 'Terraform language' through which we create documents known to be 'Terraform configuration'. These documents has infrastructure object definitions written in 'Terraform configuration language'. This document when fed to terraform program builds collection of infrastructure. A configuration can also contain any number of files and directories
+
+resource "aws_vpc" "main" {
+  cidr_block = var.base_cidr_block
+}
+
+<BLOCK TYPE> "<BLOCK LABEL>" "<BLOCK LABEL>" {
+  # Block body
+  <IDENTIFIER> = <EXPRESSION> # Argument
+}
+
+
