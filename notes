@@ -1,7 +1,7 @@
 Terraform:
 -----------
-- Terraform is a infrastructure management tool introduced by Hashicorp for creating, changing and versioning of infrastructure efficiently.
-- Terraform has its own configuration language 'Terraform language' through which we create documents known to be 'Terraform configuration'. These documents has infrastructure object definitions written in 'Terraform configuration language'. This document when fed to terraform program builds collection of infrastructure. A configuration can also contain any number of files and directories
+- Terraform is a infrastructure management tool introduced by Hashicorp for creating, changing and versioning of cloud/on-premise infrastructure efficiently.
+- Terraform has its own configuration language 'Terraform language' through which we create documents known to be 'Terraform configuration'. These documents has infrastructure object definitions written in 'Terraform configuration language'. This document when fed to terraform program builds infrastructure as per the instructions in coniguration file. A configuration can also contain any number of files and directories
 
 resource "aws_vpc" "main" {
   cidr_block = var.base_cidr_block
@@ -11,5 +11,77 @@ resource "aws_vpc" "main" {
   # Block body
   <IDENTIFIER> = <EXPRESSION> # Argument
 }
+
+---------
+
+Now, after Installation of cloud terminal and terraform software.
+
+Terraform Configuration file:
+---------------------------
+How to write Terraform configuration files:
+-------------------------------------------
+- Terraform can create infrastructure as per all the configuration files present in a directory.
+
+- First create a directory based on any name or project
+
+mkdir azureinfra
+
+- Now, create a default running file known as 'main.tf'
+
+touch azureinfra/main.tf
+
+- After writing the below definitions for the desired infrastructure, execute
+
+provider "azurerm" {
+	features{}
+}
+
+
+terraform init
+
+
+the above command downloads all the plugins for "azurerm", validates and initializes the required commands for the further steps to create infrastructure
+
+- Inorder to create any feature, include definitions for that infrastructure in that or any equivalent file
+
+provider "azurerm" {
+        features{}
+}
+
+resource "azurerm_resource_group" "rg" {
+	name	= "rg1"
+	location	= "centralindia"
+}
+
+
+in the above code 
+"azurerm_resource_group" is the reference name of the feature to create Resource Group in Azure
+
+"rg" is the name of the feature to reference inside this configuration file for future use 
+
+"name" is the actual name with which it is going to create in Azure
+sameway location
+
+Below are the commands of 'terraform'
+
+
+
+
+After writing the code above in the tf config file, execute the below command inorder to dryrun the plan but not going to create real infrastructure just a preview
+
+
+
+terraform plan --out plan1 # to save a plan to a 'file'
+
+terraform plan -var-file="production.tfvars" #environment spec-vars
+terraform plan -target=aws_instance.my_instance #resource specific
+
+
+Using the above command, we can make any number of plans by changing any number of corresponding features in the document
+
+we can also destroy the above plan using
+
+terraform destroy
+
 
 
