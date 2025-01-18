@@ -83,5 +83,9 @@ we can also destroy the above plan using
 
 terraform destroy
 
+===============
+
+
+
 
 
