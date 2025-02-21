@@ -1,3 +1,7 @@
+terraform-intellipaat
+1 09 22 vm creation and customization
+
+
 Terraform:
 -----------
 - Terraform is a infrastructure management tool introduced by Hashicorp to create, change and version cloud/on-premise infrastructure efficiently.
@@ -25,7 +29,8 @@ Terraform Configuration files:
 	terraform.tfvars- it has all real values to supply to 'main.tf'
 	outputs.tf	- file that contains all output blocks in alphabetical order
 	providers.tf	- file that contains all provider blocks and configuration.
-	backend.tf	- file for backend configuration like lockfile to locate
+	backend.tf	- file for backend configuration to save tfstate file 
+
 
 How to write Terraform configuration files:
 -------------------------------------------
@@ -37,6 +42,32 @@ mkdir -p azure/modules/{resGrp,netwrkInterf,subNet,virNet,vm} && touch azure/{ma
 
 main.tf:
 ---------
+variable "resource_group_name" {
+  type = string	
+  description = 'resource group name'
+  default = 'rg1'
+}
+variable "location" {
+  type = string
+  description = 'location'
+  default = 'eastus'
+}
+
 resource "azure_resource_group" "res_name" {
-	=
-	=
+  name = var.resource_group_name
+  location = var.location
+}
+------------
+
+	terraform init
+	terraform plan -out state1.tfstate # state from which the current state goint to happen
+	terraform apply -state state1.tfstate #apply that state if approved
+
+NOTE:
+-------
+- If we change the name of the above location or any resource, it deletes and creates new one
+- Thus, the associated resources will be gone if the resource is linked with the previous state
+- beware of the changing of the existing state of any resource
+
+
+
