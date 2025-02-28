@@ -1,0 +1,14 @@
+FROM alpine
+WORKDIR /opt
+COPY . .
+ENV TERRAFORM_VERSION="1.11.0"
+RUN apk add --no-cache python3 python3-dev py3-pip gcc musl-dev linux-headers wget zip \
+  && python3 -m venv /env \ 
+  && source /env/bin/activate \
+  && pip install --upgrade pip localstack argcomplete \
+  && wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -P /opt \
+  && unzip /opt/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /opt \
+  && mv /opt/terraform /usr/local/bin \
+  && rm /opt/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+VOLUME ["/var/run/docker.sock"]
+CMD ["sleep","900"]

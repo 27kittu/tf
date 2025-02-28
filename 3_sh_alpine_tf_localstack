@@ -2,14 +2,13 @@
 
 python3 -m venv ~/env1
 source ~/env1/bin/activate
-pip install --upgrade pip
+pip install --upgrade pip localstack argcomplete
 pip install --upgrade -r ./requirements
 
 # starting localstack
 localstack start -d
 
-# upgrade terraform to 0.12.21
-TERRAFORM_VERSION="1.10.5"
+TERRAFORM_VERSION="1.11.0"
 wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 sudo mv terraform /usr/local/bin/

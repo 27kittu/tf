@@ -1,13 +1,15 @@
 #!/bin/sh
 
-python3 -m venv ~/env1
-source ~/env1/bin/activate
-pip install --upgrade pip
-pip install --upgrade -r ./requirements
+apt update -y && apt install zip wget python3 python3.12-venv python3-pip docker.io -y
+python3 -m venv /opt/.env1
+source /opt/.env1/bin/activate
+pip install --upgrade pip argcomplete localstack
 
 # starting localstack
 localstack start -d
 
-wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-apt update && apt install terraform
+TERRAFORM_VERSION="1.11.0"
+wget -P /tmp/ https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
+  && unzip /tmp/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /tmp/ \
+  && mv /tmp/terraform /usr/bin/ \
+  && rm -rf /tmp/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
