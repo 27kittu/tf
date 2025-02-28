@@ -3,6 +3,7 @@
 apt update -y && apt install zip wget python3 python3.12-venv python3-pip docker.io -y
 python3 -m venv /opt/.env1
 source /opt/.env1/bin/activate
+
 pip install --upgrade pip argcomplete localstack
 
 # starting localstack

@@ -1,0 +1,86 @@
+variable "ec2_name" {
+default= "ec2_ubuntu"
+type	= string
+}
+-------------
+
+variable "image_id" {
+  type        = string
+  description = "The id of the machine image (AMI) to use for the server."
+
+  validation {
+    condition     = length(var.image_id) > 4 && substr(var.image_id, 0, 4) == "ami-"
+    error_message = "The image_id value must be a valid AMI id, starting with \"ami-\"."
+  }
+}
+------
+variable "session_token" {
+  type      = string
+  ephemeral = true
+}
+
+---------
+
+variable "password" {
+  type      = string
+  ephemeral = true
+}
+
+locals {
+  # local.database_password is implicitly ephemeral because 
+  # var.password is ephemeral.
+  database_password = var.password
+}
+
+
+---------
+variable "user_information" {
+  type = object({
+    name    = string
+    address = string
+  })
+  sensitive = true
+}
+
+resource "some_resource" "a" {
+  name    = var.user_information.name
+  address = var.user_information.address
+}
+---------
+
+variable "example" {
+  type     = string
+  nullable = false
+}
+---------
+
+# modules/db/main.tf
+
+output "secret_id" {
+  value       = aws_secretsmanager_secret.secret_id
+  description = "Temporary secret ID for accessing database in AWS."
+  ephemeral   = true
+}
+----------
+
+variable "service_name" {
+  type    = string
+  default = "forum"
+}
+
+variable "environment" {
+  type    = string
+  default = "dev"
+}
+
+variable "service_token" {
+  type      = string
+  ephemeral = true
+}
+
+locals {
+  service_tag   = "${var.service_name}-${var.environment}"
+  session_token = "${var.service_name}:${var.service_token}"
+}
+------------
+
