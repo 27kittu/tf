@@ -1,2 +1,5 @@
+- mkdir -p practise_1/modules/{vnet,snet,netwrk_intfs,vm} && touch practise_1/{main.tf,variables.tf,terraform.tfvars,outputs.tf,providers.tf,backend.tf} practise_1/modules/{vnet,snet,netwrk_intfs,vm}/{main.tf,variables.tf,outputs.tf}
+
+================
 terraform apply -state terraform.tfstate # saved state
 

@@ -76,13 +76,13 @@ Type of constructs in TERRAFORM:
 - Data Sources
 - Providers
 - Variables and Outputs
+- Expressions
 - Modules
 - Moved Block
 - Terraform Block
 - Backend Block
 - Checks
 - Import
-- Expressions
 - Functions
 - State
 - Tests
@@ -94,9 +94,16 @@ A precondition checks a value before Terraform applies a resource to ensure it m
 postcondition - Validate After Applying
 A postcondition checks a value after Terraform has applied a resource to ensure it behaves as expected.
 
+
+
+
+========================
 Resources:
 -------------
 - Resources blocks creates any resource that can be created and deleted as per the requirement
+
+
+
 
 ========================
 Data Sources:
@@ -140,11 +147,46 @@ ex:
 - Instances already running in that region with name starting 'ubuntu' etc.,
 
 
+
+
+
+
 ========================
 providers:
 ------------
 
 - Terraform relies on plugins called providers to interact with cloud providers, SaaS providers, and other APIs.
+
+
+
+
+
+
+========================
+Expressions: Type and values:
+-----------------------------
+- Expressions are the combination of many values inside a configuration like 'dns', 5, 'hello' 
+- often result in a single or many values
+
+Expressions: Type and values:
+- An expression will result in a value and it has a type
+- Below are the types of values that are vaid to use inside configuration files
+
+Types of data:
+------------
+primitive Types:
+----------------
+- string: a sequence of unicode characters('server')
+- number: a numeric value (3)
+- bool  : true/ false
+
+Complex types:
+-------------------
+- list
+- object
+- map
+
+
 
 
 
@@ -158,7 +200,8 @@ Variables and outputs:
 
 input variables:
 -----------------
-- Input variables are termed with block 'variable' inside the files and also in it's dedicated file 'variables.tf' for declaring of variables
+- Input variables are termed with block 'variable' 
+- It has a dedicated file 'variables.tf' for declaring of variables
 
 -------------
 variable "image_id" {
@@ -336,6 +379,13 @@ locals {
 ----------
 
 
+
+
+
+
+
+
+
 ========================
 Modules:
 ---------
@@ -381,7 +431,6 @@ terraform-project/		#ROOT DIRECTORY
 │   │   ├── outputs.tf
 
 
-
 Published Modules:
 ------------------
 - In addition to modules from the local filesystem, Terraform can load modules from a public or private registry. 
@@ -389,29 +438,66 @@ Published Modules:
 - Firms also can create their own modules for use within the projects and host in Terraform for use in the organization
 - These modules are in remote url inside TERRAFORM providers registry 
 
-========================
 
+
+
+
+========================
 Moved block:
 ------------
 - This block is used to change the name of a local resource to other name
 - This block has specifications with two fields 'from' and 'to'
 - 'from' field refers to previous name/address and 'to' field refers to current name/address of that resource
 
-========================
 
+
+
+
+
+========================
 Terraform block:
 ----------------
 - 
-========================
 
+
+
+
+
+
+
+
+
+========================
 Backend block:
 --------------
+
+
+
+
+
+
+
+
 ========================
 checks:
 -------
+
+
+
+
+
+
+
 ========================
 import:
 -------
+
+
+
+
+
+
+
 ========================
 expressions:
 ------------

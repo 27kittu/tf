@@ -1,12 +1,5 @@
-First create directory structure for a project:
-
-- mkdir -p practise_1/modules/{vnet,snet,netwrk_intfs,vm} && touch practise_1/{main.tf,variables.tf,terraform.tfvars,outputs.tf,providers.tf,backend.tf} practise_1/modules/{vnet,snet,netwrk_intfs,vm}/{main.tf,variables.tf,outputs.tf}
-
-================
 The primary workflow commands are given first, followed by less common or more advanced commands.
-
 Main commands:  
-
   init          Prepare your working directory for other commands
   validate      Check whether the configuration is valid
   plan          Show changes required by the current configuration
@@ -33,8 +26,3 @@ All other commands:
   untaint       Remove the 'tainted' state from a resource instance
   version       Show the current Terraform version
   workspace     Workspace management
-
-Global options (use these before the subcommand, if any):
-  -chdir=DIR    Switch to a different working directory before executing the given subcommand.
-  -help         Show this help output, or the help for a specified subcommand.
-  -version      An alias for the "version" subcommand
