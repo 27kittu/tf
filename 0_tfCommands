@@ -3,3 +3,6 @@
 ================
 terraform apply -state terraform.tfstate # saved state
 
+- To show the current infrastructure as per the state file
+	terraform show 
+

@@ -14,4 +14,3 @@ provider "aws" {
     iam      = "http://localhost:4566"
   }
 }
-
