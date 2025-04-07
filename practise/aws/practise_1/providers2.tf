@@ -1,4 +1,5 @@
 provider "aws" {
+  alias= aws_local
   access_key                  = "test"
   secret_key                  = "test"
   region                      = "us-east-1"
