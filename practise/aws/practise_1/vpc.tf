@@ -16,17 +16,6 @@ resource "aws_subnet" "subnet1" {
   }
 }
 
-resource "aws_route_table" "rt1" {
-  vpc_id = aws_vpc.vpc1.id
-  route {
-    cidr_block = "192.168.0.0/26"
-    gateway_id = aws_internet_gateway.gw1.id
-  }
-  tags = {
-    Name = "rt_0"
-  }
-}
-
 resource "aws_internet_gateway" "gw1" {
   vpc_id = aws_vpc.vpc1.id
   tags = {
@@ -34,8 +23,10 @@ resource "aws_internet_gateway" "gw1" {
   }
 }
 
-resource "aws_internet_gateway_attachment" "gwa" {
-  internet_gateway_id = aws_internet_gateway.gw1.id
-  vpc_id              = aws_vpc.vpc1.id
-  depends_on          = [aws_internet_gateway.gw1]
+resource "aws_route_table" "rt1" {
+  vpc_id = aws_vpc.vpc1.id
+  route {
+    gateway_id = aws_internet_gateway.gw1.id
+    cidr_block = "0.0.0.0/0"
+  }
 }
